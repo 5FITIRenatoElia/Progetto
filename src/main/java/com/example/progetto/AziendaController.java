@@ -11,16 +11,6 @@ public class AziendaController {
 		this.aziende = listaaziende;
 	}
  
-	@GetMapping("/ciao")
-	String getSaluto() {
-		return "Salutami a Socrate!";
-	}
- 
-	@GetMapping("/ciao/{nome}")
-	String getSalutoNome(@PathVariable String nome) {
-		return "Ciao " + nome +", oggi è una bellissima giornata!";
-	}
- 
 	//CREATE
 	@PostMapping("/aziende")
 	Azienda createAzienda(@RequestBody Azienda a) {
@@ -38,15 +28,15 @@ public class AziendaController {
 	Azienda printAzienda(@PathVariable long id_azienda) {
 		return aziende.findById(id_azienda).orElseThrow(null); 
 	}
-	
+
 	//DELETE
-	@DeleteMapping("/aziende/{id_azienda}/delete")
+	@GetMapping("/aziende/{id_azienda}/delete")
 	Iterable<Azienda> deleteAzienda(@PathVariable long id_azienda) {
 		aziende.deleteById(id_azienda); 
 		return aziende.findAll();
 	}
  
-	//UPDATE
+	//UPDATEANAG
 	@PutMapping("/aziende/{id_azienda}/updateAnagrafica")
 	Iterable<Azienda> updateAnagrafica(@PathVariable long id_azienda, @RequestBody Azienda Anagrafica) {
 		Azienda a = aziende.findById(id_azienda).orElseThrow(null); 
@@ -55,6 +45,7 @@ public class AziendaController {
 		return aziende.findAll();
 	}
 	
+	//UPDATEPASS
 	@PutMapping("/aziende/{id_azienda}/updatePassword")
 	Iterable<Azienda> updatePassword(@PathVariable long id_azienda, @RequestBody Azienda Password) {
 		Azienda a = aziende.findById(id_azienda).orElseThrow(null); 
@@ -62,6 +53,5 @@ public class AziendaController {
 		aziende.save(a);
 		return aziende.findAll();
 	}
-	
 }
  
