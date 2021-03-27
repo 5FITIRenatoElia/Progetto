@@ -30,7 +30,7 @@ public class AziendaController {
 	}
 
 	//DELETE
-	@GetMapping("/aziende/{id_azienda}/delete")
+	@DeleteMapping("/aziende/{id_azienda}/delete")
 	Iterable<Azienda> deleteAzienda(@PathVariable long id_azienda) {
 		aziende.deleteById(id_azienda); 
 		return aziende.findAll();

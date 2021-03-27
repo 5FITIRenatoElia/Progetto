@@ -31,7 +31,7 @@ public class CausaleController {
 	}
 
 	//DELETE
-	@GetMapping("/causali/{id_causale}/delete")
+	@DeleteMapping("/causali/{id_causale}/delete")
 	Iterable<Causale> deleteCausale(@PathVariable long id_causale) {
 		causale.deleteById(id_causale); 
 		return causale.findAll();
@@ -45,4 +45,13 @@ public class CausaleController {
 		causale.save(c);
 		return causale.findAll();
 	}
+	
+	//UPDATEDareAvere
+		@PutMapping("/causali/{id_causale}/updatedareAvere")
+		Iterable<Causale> updatedareAvere(@PathVariable long id_causale, @RequestBody Causale dareAvere) {
+			Causale c = causale.findById(id_causale).orElseThrow(null); 
+			c.setDareAvere(dareAvere.getDareAvere());
+			causale.save(c);
+			return causale.findAll();
+		}
 }
