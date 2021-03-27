@@ -1,14 +1,13 @@
 package com.example.progetto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
- 
+import java.util.*;
+
+import javax.persistence.*;
+
 @Entity(name="Aziende")
  
 public class Azienda {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long idAzienda;
@@ -19,6 +18,10 @@ public class Azienda {
 	@Column(name="passwd", nullable=false, length=128)
 	private char[] passwd;
  
+	@OneToMany(mappedBy="azienda", cascade = CascadeType.ALL,orphanRemoval= true)
+    private List<Movimento> Movimento = new ArrayList<>();
+	
+	
 	public Azienda(String anagrafica, String userid, char[] passwd) {
 		this.anagrafica = anagrafica;
 		this.userid = userid;

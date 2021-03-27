@@ -1,5 +1,6 @@
 package com.example.progetto;
 
+import java.util.*;
 import javax.persistence.*;
  
 @Entity(name="Causali")
@@ -10,9 +11,12 @@ public class Causale {
 	private long idCausale;
 	@Column(name="nome", unique=true, nullable=false, length=40)
 	private String nome;
-	@Column(name="dareAvere", unique=true, nullable=false, length=16)
+	@Column(name="dareAvere", unique=false, nullable=false)
 	private char dareAvere;
-  
+
+	@OneToMany(mappedBy="causale", cascade = CascadeType.ALL,orphanRemoval= true)
+    private List<Movimento> Movimento = new ArrayList<>();
+	
 	public Causale() {}
 
 	public Causale(String nome, char dareAvere) {
